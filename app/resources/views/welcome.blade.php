@@ -89,7 +89,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel Hello World!
+                    Youness ELYAHYAOUI +++ HSSINI Abdellah
                 </div>
 
                 <div class="links">
