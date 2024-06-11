@@ -45,4 +45,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/laravel-hello-world
             docker stop laravel-hello-world || true
             docker rm laravel-hello-world || true
-            docker run -d -p 80:80 --name laravel-hello-world ${{ secrets.DOCKER_USERNAME }}/laravel-hello-world
+            docker run -d -p 3000:80 --name laravel-hello-world ${{ secrets.DOCKER_USERNAME }}/laravel-hello-world
