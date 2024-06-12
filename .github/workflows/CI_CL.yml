@@ -43,7 +43,6 @@ jobs:
           port: ${{ secrets.EC2_SSH_PORT }}
           script: |
             cd ~/devops
-            rm -R DeployProject/
             git clone https://github.com/youness-elyahyaoui/DeployProject
             cd DeployProject
             docker compose down
