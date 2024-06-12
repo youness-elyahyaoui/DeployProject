@@ -46,3 +46,4 @@ jobs:
             docker stop deployproject || true
             docker rm deployproject || true
             docker run -d -p 3000:80 --name deployproject ${{ secrets.DOCKER_USERNAME }}/deployproject
+            docker exec -it deployproject bash -c "chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && chmod -R 775 /var/www/storage /var/www/bootstrap/cache"
