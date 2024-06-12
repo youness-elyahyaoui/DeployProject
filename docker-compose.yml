@@ -3,7 +3,7 @@ services:
   laravel-app:
     build: .
     ports:
-      - "80:80"
+      - "9000:80"
     command: ["-template", "/var/www/.env.example:/var/www/.env", "/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
     container_name: laravel-app
     volumes:

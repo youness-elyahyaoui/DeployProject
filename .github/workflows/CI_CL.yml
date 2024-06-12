@@ -42,7 +42,10 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.EC2_SSH_PORT }}
           script: |
-            docker stop deployproject || true
-            docker rm deployproject || true
-            docker pull ${{ secrets.DOCKER_USERNAME }}/deployproject
-            docker run -d -p 3000:80 --name deployproject ${{ secrets.DOCKER_USERNAME }}/deployproject
+            cd ~/devops
+            rm -R DeployProject/
+            git clone https://github.com/youness-elyahyaoui/DeployProject
+            cd DeployProject
+            docker compose down
+            docker compose up
+
