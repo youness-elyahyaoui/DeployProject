@@ -6,6 +6,9 @@ services:
       - "9000:80"
     command: ["-template", "/var/www/.env.example:/var/www/.env", "/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
     container_name: laravel-app
+    volumes:
+      - ./app/:/home/source/main
+    working_dir: /home/source/main
   mysql:
     image: "mysql:5.7"
     restart: always
