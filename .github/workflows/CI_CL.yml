@@ -23,6 +23,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
+          cp .env.example .env
           docker build -t ${{ secrets.DOCKER_USERNAME }}/deployproject .
           docker push ${{ secrets.DOCKER_USERNAME }}/deployproject
 
@@ -49,3 +50,4 @@ jobs:
             docker exec deployproject chmod 777 /sessions
             docker exec deployproject chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
             docker exec deployproject chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+            docker logs deployproject  # Check logs for any issues
