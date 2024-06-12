@@ -1,19 +1,11 @@
-FROM deltasquare4/docker-php-base:latest
+FROM composer:2.3.8 as composer_build
 
-MAINTAINER Rakshit Menpara <rakshit@improwised.com>
+WORKDIR /app
+COPY . /app
+RUN composer install --optimize-autoloader --no-dev --ignore-platform-reqs --no-interaction --no-plugins --no-scripts --prefer-dist
 
-# Copy Composer
-COPY ./app/composer.* /var/www/
-
-RUN composer install \
-  --no-scripts \
-  --no-autoloader \
-  --no-dev
-
-# Copy app
-COPY ./app /var/www
-
-# Add build dependencies to compile drafter
-RUN set -ex \
-  && composer dump-autoload --optimize \
-  && chown -R nginx:nginx /var/www
+FROM php:8.1.8
+COPY --from=composer_build /app/ /app/
+WORKDIR /app
+CMD php artisan serve --host=0.0.0.0 --port $PORT
+EXPOSE $PORT
