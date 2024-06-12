@@ -42,9 +42,11 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.EC2_SSH_PORT }}
           script: |
-            cd ~/devops
-            git clone https://github.com/youness-elyahyaoui/DeployProject
+            cd ~/devops || exit
+            if [ -d "DeployProject" ]; then
+              sudo rm -rf DeployProject
+            fi
+            git clone https://github.com/youness-elyahyaoui/DeployProject.git
             cd DeployProject
             docker-compose down
             docker-compose up -d
-

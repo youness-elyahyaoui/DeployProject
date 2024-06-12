@@ -1,26 +1,12 @@
 version: '3.1'
 services:
-  laravel-app:
+  web:
     build: .
     ports:
-      - "9000:80"
+      - "3000:80"
     command: ["-template", "/var/www/.env.example:/var/www/.env", "/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
-    container_name: laravel-app
-    volumes:
-      - ./app/:/home/source/main
-    working_dir: /home/source/main
   mysql:
     image: "mysql:5.7"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: my-secret-password
-  nginx:
-    build:
-      context: ./docker/nginx
-    container_name: server-nginx
-    ports:
-      - "8000:80"
-    depends_on:
-      - laravel-app
-    volumes:
-      - ./app/:/home/source/main
