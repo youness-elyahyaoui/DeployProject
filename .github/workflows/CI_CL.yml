@@ -45,6 +45,6 @@ jobs:
             cd ~/devops
             git clone https://github.com/youness-elyahyaoui/DeployProject
             cd DeployProject
-            docker compose down
-            docker compose up
+            docker-compose down
+            docker-compose up
 
