@@ -45,5 +45,7 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/deployproject
             docker stop deployproject || true
             docker rm deployproject || true
-            docker run -d -p :80 --name deployproject ${{ secrets.DOCKER_USERNAME }}/deployproject
-            docker exec -it deployproject bash -c "chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && chmod -R 775 /var/www/storage /var/www/bootstrap/cache"
+            docker run -d -p 9000:80 --name deployproject ${{ secrets.DOCKER_USERNAME }}/deployproject
+            docker exec deployproject chmod 777 /sessions
+            docker exec deployproject chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+            docker exec deployproject chmod -R 775 /var/www/storage /var/www/bootstrap/cache
