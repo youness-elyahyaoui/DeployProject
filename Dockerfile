@@ -5,6 +5,8 @@ MAINTAINER Rakshit Menpara <rakshit@improwised.com>
 # Copy Composer
 COPY ./app/composer.* /var/www/
 
+RUN php artisan config:cache
+
 RUN composer install \
   --no-scripts \
   --no-autoloader \
