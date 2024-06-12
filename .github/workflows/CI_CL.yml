@@ -47,6 +47,6 @@ jobs:
             docker rm deployproject || true
             docker run -d -p 9000:80 --name deployproject ${{ secrets.DOCKER_USERNAME }}/deployproject
             docker exec deployproject chmod 777 /sessions
-            docker exec deployproject chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-            docker exec deployproject chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+            docker exec deployproject chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache /var/www/bootstrap/
+            docker exec deployproject chmod -R 777 /var/www/storage /var/www/bootstrap/cache /var/www/bootstrap/
             docker logs deployproject  # Check logs for any issues
